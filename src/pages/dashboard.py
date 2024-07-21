@@ -10,6 +10,21 @@ class DashboardPage(QWidget):
         self.setStyleSheet("background-color: #2b2b2b; color: #00aaff;")
 
         main_layout = QVBoxLayout()
+        main_layout = QVBoxLayout()
+        header_layout = QHBoxLayout()
+        title_label = QLabel("ARKA 24")
+        title_label.setFont(QFont('Arial', 24))
+        competition_label = QLabel("CANSAT COMPETITION")
+        competition_label.setFont(QFont('Arial', 16))
+        team_id_label = QLabel("TEAM ID: XXXX")
+        team_id_label.setFont(QFont('Arial', 12))
+
+        header_layout.addWidget(title_label)
+        header_layout.addWidget(competition_label)
+        header_layout.addWidget(team_id_label, alignment=Qt.AlignRight)  
+        header_layout.addStretch()  
+        
+        main_layout.addLayout(header_layout)
         
 
         # Add Header
