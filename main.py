@@ -1,10 +1,12 @@
 import sys
+import multiprocessing
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap
 from src.pages.dashboard import DashboardPage
+from src.script.dummy_serial_port import data_generation_process
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, data_queue):
         super().__init__()
         self.setWindowTitle("Ground Control Software")
         
@@ -15,7 +17,7 @@ class MainWindow(QMainWindow):
         self.background_label.setScaledContents(True)
         
         # Set Dashboard Page
-        self.dashboard = DashboardPage(self)
+        self.dashboard = DashboardPage(data_queue, self)
         self.setCentralWidget(self.dashboard)
         
         # Adjust the background label when window is resized
@@ -26,7 +28,13 @@ class MainWindow(QMainWindow):
         event.accept()
 
 if __name__ == "__main__":
+    data_queue = multiprocessing.Queue()
+    process = multiprocessing.Process(target=data_generation_process, args=(data_queue, 1))
+    process.start()
+
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.showMaximized()  # This line sets the window to maximized
+    window = MainWindow(data_queue)
+    window.showMaximized()
     sys.exit(app.exec_())
+
+    process.terminate()
