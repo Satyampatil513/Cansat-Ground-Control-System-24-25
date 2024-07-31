@@ -2,37 +2,49 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from src.components.navigation_bar import NavigationBar
-# from src.components.header import Header
+
+
+# from src.components.header import header
+from src.components.header import Header
 
 class DashboardPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setStyleSheet("background-color: #2b2b2b; color: #00aaff;")
-
+        
         main_layout = QVBoxLayout()
 
         # Add Header
+        header = Header()
+        # header.setFixedHeight(100)
+        main_layout.addWidget(header)
         # header = Header()
         # main_layout.addWidget(header)
-
-        # Add Navigation Bar
+        
         nav_bar = NavigationBar()
         main_layout.addWidget(nav_bar)
 
-        # Summary Widgets
         summary_layout = QVBoxLayout()
 
         # Row 1
+       
+       
         row1_layout = QHBoxLayout()
+        # self.layout = QHBoxLayout(self)
+        # self.layout.setContentsMargins(0, 0, 0, 0)  # Remove margins
+        # self.layout.setSpacing(0)  # Remove spacing
+
         altitude_label = self.create_summary_label("127", "Altitude", "m")
         pressure_label = self.create_summary_label("10132", "Pressure", "Pa")
         battery_label = self.create_summary_label("60", "Battery", "%")
         temperature_label = self.create_summary_label("32", "Temperature", "°C")
-
+       
         row1_layout.addWidget(altitude_label)
         row1_layout.addWidget(pressure_label)
         row1_layout.addWidget(battery_label)
         row1_layout.addWidget(temperature_label)
+        # self.layout.setContentsMargins(0, 0, 0, 0)  # Remove margins
+        # self.layout.setSpacing(0)  # Remove spacing
 
         # Row 2
         row2_layout = QHBoxLayout()
@@ -62,17 +74,20 @@ class DashboardPage(QWidget):
     def create_summary_label(self, value, label, unit=""):
         widget = QWidget()
         layout = QVBoxLayout()
-
+        value_unit_layout = QHBoxLayout()
         value_label = QLabel(value)
-        value_label.setFont(QFont('Arial', 40))
+        value_label.setFont(QFont('Poppins', 30, QFont.Bold))
         value_label.setAlignment(Qt.AlignCenter)
 
         unit_label = QLabel(unit)
-        unit_label.setFont(QFont('Arial', 20))
+        unit_label.setFont(QFont('Poppins', 14, QFont.Bold))
         unit_label.setAlignment(Qt.AlignCenter)
+        value_unit_layout.addWidget(value_label)
+        value_unit_layout.addWidget(unit_label)
 
         description_label = QLabel(label)
-        description_label.setFont(QFont('Arial', 16))
+        description_label.setFont(QFont('Poppins', 24, QFont.Bold))
+        description_label.setStyleSheet("color: white;") 
         description_label.setAlignment(Qt.AlignCenter)
 
         layout.addWidget(value_label)
@@ -80,5 +95,6 @@ class DashboardPage(QWidget):
         layout.addWidget(description_label)
 
         widget.setLayout(layout)
-        widget.setStyleSheet("background-color: #1f1f1f; border-radius: 10px; padding: 20px;")
+        widget.setStyleSheet("background-color: #1f1f1f; border-radius: 5px; padding: 10px;")
         return widget
+
