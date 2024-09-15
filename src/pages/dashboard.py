@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from src.components.navigation_bar import NavigationBar
