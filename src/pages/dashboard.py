@@ -13,7 +13,7 @@ class DashboardPage(QWidget):
 
         # Add Header
         # header = Header()
-        # main_layout.addWidget(header)
+        # main_layout.addWidget(header) ""
 
         # Add Navigation Bar
         nav_bar = NavigationBar()
